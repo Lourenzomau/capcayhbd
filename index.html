@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Button ☾⋆｡° ✮☽</title>
+  <style>
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background: #1a1a1a;
+      color: #f0e6f6;
+      font-family: 'Century Gothic', sans-serif;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; 
+      text-align: center;
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      box-sizing: border-box;
+    }
+    .container {
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    @media (min-width: 768px) {
+.container {
+width: 80%;
+}
+}
+
+@media (min-width: 1200px) {
+.container {
+width: 70%;
+}
+}
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.5);
+      transition: transform 0.3s ease;
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    .poem {
+      margin-top: 20px;
+      padding: 20px;
+      width: 100%;
+    }
+    .poem-line {
+      font-size: 20px;
+      line-height: 1.8;
+      word-spacing: 2px;
+    }
+    .rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .raindrop {
+      position: absolute;
+      background: #9ec5ff;
+      width: 2px;
+      height: 10px;
+      animation: fall 1s infinite linear;
+      opacity: 0.7;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+   <img src="pertama.jpg" alt="gambar" width="200" height="200"  style="border-radius: 50%; margin-top: 20px;" border="5px" color="white">
+    <h1>hay sayang hari ini hari spesial yah untukmu hehe maaf tidak bisa hadir</h1>
+    <h1>tak ada yang bisa ku perbuat kecuali hanya ucapan saja sayang🩷</h1>
+    <button id="loveButton">Tekan ini 🩷</button>
+    <div class="poem" id="poem"></div>
+    <div class="rain" id="rain"></div>
+    <audio id="music" autoplay>
+      <source src="song.mp3">
+    </audio>
+  </div>
+  <script>
+    const button = document.getElementById("loveButton");
+    const poemContainer = document.getElementById("poem");
+    const rainContainer = document.getElementById("rain");
+    const music = document.getElementById("music");
+
+    const poemLines = [
+      "ingatkah kamu sayang ✮⋆˙", "waktu kita bertemu secara tak sengaja?☂︎",
+      "bahkan pertemuan۶ৎ", "yang tak disangka-sangka𓀗",
+      "kita berdua saling berbincang", "tertawa dan mengerjai seseorang itu", "dengan kata pacaran‧₊🪐",
+      "namun dengan kata itu", "kata yang hanya sekedar candaan∘ ∘ ∘ ", "malah menjadi",
+      "KENYATAAN💍",
+      "ini sudah ke bulan 10 kita✞", "setelah kata pacaran itu",
+      "banyak tawa, sedih-`♡´-", "kedukaan, menderita", "masalah, dan juga ketakukan",
+      "namun karna keteguhan hatimu🌟", "sayangku cia, kita masih bertahan𓍊𓋼𓍊𓋼𓍊", "selama ini sampai hari ini🗓",
+      "sungguh tak ada kata", "untuk mengucap terimakasih", "selain menangis dalam pelukanmu",
+      "namun kenapa jarak harus➤", "memisahkan kita seperti ini────୨ৎ────", "maaf tidak bisa menjadi𓇢𓆸", "sandaranmu ketika kau⛈", "sedih, menangis sayang𓄼", "tapi percayalah", "akan datang hari⋆☀︎｡", "ketika kita melepas semuanya𓆰𓆪", "dalam dekupan hangat", "kecupan bibirꨄ︎", "maupun hangatnya pelukan🫂",
+      "{\__／}",
+       "    ", " （ ．.）💖",
+    "  ／ v v/",
+    "jujur padamu hanya", "kamu dan cuman", "kamu sayang apa yang", "aku lakukan apa yang", "aku pikirkan semuanya hanya", "bertujuan padamu untuk masa", "depan bersama masa depan", "kita bagaimana kita beranjak", "dewasa bagaimana kehidupan", "setelahnya namun saat", "bersamamu aku aman", "selamanya sampai kita tua", "sampai jadi debu", "kau di liang yang satu", "ku di sebelahmu.", "I LOVE YOU SAYANG SELAMAT ULANG TAHUN🩷"
+    ];
+
+    button.addEventListener("click", () => {
+      music.play();
+      startTypingPoem();
+      createRain();
+    });
+
+    function startTypingPoem() {
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index >= poemLines.length) {
+          clearInterval(interval);
+          return;
+        }
+        const lineElement = document.createElement("div");
+        lineElement.classList.add("poem-line");
+        lineElement.textContent = poemLines[index];
+        poemContainer.appendChild(lineElement);
+        index++;
+        window.scrollTo(0, document.body.scrollHeight); // Scroll down automatically
+      }, 1000); // 1000ms = 1 second delay between lines
+    }
+
+    function createRain() {
+      rainContainer.innerHTML = "";
+      for (let i = 0; i < 100; i++) {
+        const raindrop = document.createElement("div");
+        raindrop.classList.add("raindrop");
+        raindrop.style.left = Math.random() * 100 + "vw";
+        raindrop.style.animationDuration = Math.random() * 3 + 3 + "s";
+        raindrop.style.animationDelay = Math.random() * 2 + "s";
+        rainContainer.appendChild(raindrop);
+      }
+    }
+  </script>
+  
+</body>
+</html>
